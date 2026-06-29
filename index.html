@@ -1115,6 +1115,11 @@
     }).catch(function(){});
   }
 
+  // Expõe startMusic para outros scripts usarem
+  window._startMusicIfNeeded = function(){
+    if(!playing) startMusic();
+  };
+
   function toggleMusic(){
     if(playing){
       audio.pause();
@@ -1173,6 +1178,7 @@
     if(i<0 || i>pages.length-1) return;
     current = i;
     update();
+    if(window._startMusicIfNeeded) window._startMusicIfNeeded();
   }
 
   // Safari-safe button handlers using touchend + preventDefault
